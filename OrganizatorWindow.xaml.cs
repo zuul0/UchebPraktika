@@ -23,5 +23,19 @@ namespace UchebPraktika
         {
             InitializeComponent();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            orgRegWin orgRegWin = new orgRegWin();
+            orgRegWin.Show();
+            this.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+           MeropriyatiyaWin meropriyatiyaWin = new MeropriyatiyaWin();
+            meropriyatiyaWin.Show();
+            this.Close();
+        }
     }
 }

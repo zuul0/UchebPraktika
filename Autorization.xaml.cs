@@ -194,5 +194,11 @@ namespace UchebPraktika
                 }
             }
         }
+
+        private void back_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+        }
     }
 }

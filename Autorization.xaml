@@ -7,7 +7,7 @@
         xmlns:captcha="clr-namespace:EasyCaptcha.Wpf;assembly=EasyCaptcha.Wpf"
         mc:Ignorable="d"
         Title="Авторизация" Height="450" Width="800">
-    <StackPanel HorizontalAlignment="Center">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Width="300" Height="400">
 
         <TextBlock FontSize="30" TextAlignment="Center">Авторизация
         </TextBlock>
@@ -21,6 +21,8 @@
         <captcha:Captcha x:Name="CaptchaTextBox"/>
         <TextBox x:Name="TextBoxCap"/>
         <Button Content="Войти" Margin="20" x:Name="enter" Click="enter_Click" />
+        <Button Content="На Главную" Margin="20" x:Name="backBtn" Click="back_Click" />
+
     </StackPanel>
 
 
