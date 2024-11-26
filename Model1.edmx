@@ -1,0 +1,1015 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище bbbbbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Activnost_Merop">
+          <Key>
+            <PropertyRef Name="Id_activnosti" />
+            <PropertyRef Name="Id_meropriyatiya" />
+          </Key>
+          <Property Name="Id_activnosti" Type="int" Nullable="false" />
+          <Property Name="Id_meropriyatiya" Type="int" Nullable="false" />
+          <Property Name="Data_provedeniya" Type="int" Nullable="false" />
+          <Property Name="Vremya" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Id_moderator" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Activnosti">
+          <Key>
+            <PropertyRef Name="Id_activnosti" />
+          </Key>
+          <Property Name="Id_activnosti" Type="int" Nullable="false" />
+          <Property Name="Nazvanie" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Goroda">
+          <Key>
+            <PropertyRef Name="Id_gorod" />
+          </Key>
+          <Property Name="Id_gorod" Type="int" Nullable="false" />
+          <Property Name="Nazvanie" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Ssilka" Type="nvarchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Merop_Gorod">
+          <Key>
+            <PropertyRef Name="Id_meropriyatiya" />
+            <PropertyRef Name="Id_gorod" />
+          </Key>
+          <Property Name="Id_meropriyatiya" Type="int" Nullable="false" />
+          <Property Name="Id_gorod" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Merop_TipMerop_Napravl">
+          <Key>
+            <PropertyRef Name="Id_meropriyatiya" />
+          </Key>
+          <Property Name="Id_meropriyatiya" Type="int" Nullable="false" />
+          <Property Name="Id_tip_meropriyatiya" Type="int" Nullable="false" />
+          <Property Name="Id_napravlenie" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Merop_Uchastnik">
+          <Key>
+            <PropertyRef Name="Id_meropriyatiya" />
+          </Key>
+          <Property Name="Id_meropriyatiya" Type="int" Nullable="false" />
+          <Property Name="Id_uchastnika" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Merop_Zhuri">
+          <Key>
+            <PropertyRef Name="Id_meropriyatiya" />
+            <PropertyRef Name="Id_activnosti" />
+            <PropertyRef Name="Id_zhuri" />
+          </Key>
+          <Property Name="Id_meropriyatiya" Type="int" Nullable="false" />
+          <Property Name="Id_activnosti" Type="int" Nullable="false" />
+          <Property Name="Id_zhuri" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Meropriyatiya">
+          <Key>
+            <PropertyRef Name="Id_meropriyatiya" />
+          </Key>
+          <Property Name="Id_meropriyatiya" Type="int" Nullable="false" />
+          <Property Name="Nazvanie" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Data_nachala" Type="date" Nullable="false" />
+          <Property Name="Prodolzhidelnoct" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Napravlenie">
+          <Key>
+            <PropertyRef Name="Id_napravlenie" />
+          </Key>
+          <Property Name="Id_napravlenie" Type="int" Nullable="false" />
+          <Property Name="Nazvanie" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Polzovatel_Napravlenie">
+          <Key>
+            <PropertyRef Name="Id_polzovatelya" />
+          </Key>
+          <Property Name="Id_polzovatelya" Type="int" Nullable="false" />
+          <Property Name="Id_napravlenie" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Polzovatel_Rol">
+          <Key>
+            <PropertyRef Name="Id_polzovatelya" />
+          </Key>
+          <Property Name="Id_polzovatelya" Type="int" Nullable="false" />
+          <Property Name="Id_rol" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Polzovateli">
+          <Key>
+            <PropertyRef Name="Id_polzovatelya" />
+          </Key>
+          <Property Name="Id_polzovatelya" Type="int" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Pochta" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Data_rozhdeniya" Type="date" Nullable="false" />
+          <Property Name="Telephone" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="Parol" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Pol" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roli">
+          <Key>
+            <PropertyRef Name="Id_rol" />
+          </Key>
+          <Property Name="Id_rol" Type="int" Nullable="false" />
+          <Property Name="Nazvanie" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Strani">
+          <Key>
+            <PropertyRef Name="Id1" />
+          </Key>
+          <Property Name="Id1" Type="int" Nullable="false" />
+          <Property Name="Id2" Type="nvarchar" MaxLength="20" />
+          <Property Name="Nazvanie" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Nazvanie_Angl" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tip_meropriyatiya">
+          <Key>
+            <PropertyRef Name="Id_tip_meropriyatiya" />
+          </Key>
+          <Property Name="Id_tip_meropriyatiya" Type="int" Nullable="false" />
+          <Property Name="Nazvanie" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "bbbbb.dbo.MeropriyatiyaMainW" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="MeropriyatiyaMainW">
+          <Key>
+            <PropertyRef Name="Id_meropriyatiya" />
+            <PropertyRef Name="Nazvanie" />
+            <PropertyRef Name="Data_nachala" />
+            <PropertyRef Name="Expr1" />
+          </Key>
+          <Property Name="Id_meropriyatiya" Type="int" Nullable="false" />
+          <Property Name="Nazvanie" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Data_nachala" Type="date" Nullable="false" />
+          <Property Name="Expr1" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Activnost_Merop_Activnosti">
+          <End Role="Activnosti" Type="Self.Activnosti" Multiplicity="1" />
+          <End Role="Activnost_Merop" Type="Self.Activnost_Merop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activnosti">
+              <PropertyRef Name="Id_activnosti" />
+            </Principal>
+            <Dependent Role="Activnost_Merop">
+              <PropertyRef Name="Id_activnosti" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Activnost_Merop_Meropriyatiya">
+          <End Role="Meropriyatiya" Type="Self.Meropriyatiya" Multiplicity="1" />
+          <End Role="Activnost_Merop" Type="Self.Activnost_Merop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meropriyatiya">
+              <PropertyRef Name="Id_meropriyatiya" />
+            </Principal>
+            <Dependent Role="Activnost_Merop">
+              <PropertyRef Name="Id_meropriyatiya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Activnost_Merop_Polzovateli">
+          <End Role="Polzovateli" Type="Self.Polzovateli" Multiplicity="1" />
+          <End Role="Activnost_Merop" Type="Self.Activnost_Merop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Polzovateli">
+              <PropertyRef Name="Id_polzovatelya" />
+            </Principal>
+            <Dependent Role="Activnost_Merop">
+              <PropertyRef Name="Id_meropriyatiya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Merop_Gorod_Goroda">
+          <End Role="Goroda" Type="Self.Goroda" Multiplicity="1" />
+          <End Role="Merop_Gorod" Type="Self.Merop_Gorod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Goroda">
+              <PropertyRef Name="Id_gorod" />
+            </Principal>
+            <Dependent Role="Merop_Gorod">
+              <PropertyRef Name="Id_gorod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Merop_Gorod_Meropriyatiya">
+          <End Role="Meropriyatiya" Type="Self.Meropriyatiya" Multiplicity="1" />
+          <End Role="Merop_Gorod" Type="Self.Merop_Gorod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meropriyatiya">
+              <PropertyRef Name="Id_meropriyatiya" />
+            </Principal>
+            <Dependent Role="Merop_Gorod">
+              <PropertyRef Name="Id_meropriyatiya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Merop_TipMerop_Napravl_Meropriyatiya">
+          <End Role="Meropriyatiya" Type="Self.Meropriyatiya" Multiplicity="1" />
+          <End Role="Merop_TipMerop_Napravl" Type="Self.Merop_TipMerop_Napravl" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Meropriyatiya">
+              <PropertyRef Name="Id_meropriyatiya" />
+            </Principal>
+            <Dependent Role="Merop_TipMerop_Napravl">
+              <PropertyRef Name="Id_meropriyatiya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Merop_TipMerop_Napravl_Napravlenie">
+          <End Role="Napravlenie" Type="Self.Napravlenie" Multiplicity="1" />
+          <End Role="Merop_TipMerop_Napravl" Type="Self.Merop_TipMerop_Napravl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Napravlenie">
+              <PropertyRef Name="Id_napravlenie" />
+            </Principal>
+            <Dependent Role="Merop_TipMerop_Napravl">
+              <PropertyRef Name="Id_napravlenie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Merop_TipMerop_Napravl_Tip_meropriyatiya">
+          <End Role="Tip_meropriyatiya" Type="Self.Tip_meropriyatiya" Multiplicity="1" />
+          <End Role="Merop_TipMerop_Napravl" Type="Self.Merop_TipMerop_Napravl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tip_meropriyatiya">
+              <PropertyRef Name="Id_tip_meropriyatiya" />
+            </Principal>
+            <Dependent Role="Merop_TipMerop_Napravl">
+              <PropertyRef Name="Id_tip_meropriyatiya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Merop_Uchastnik_Meropriyatiya">
+          <End Role="Meropriyatiya" Type="Self.Meropriyatiya" Multiplicity="1" />
+          <End Role="Merop_Uchastnik" Type="Self.Merop_Uchastnik" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Meropriyatiya">
+              <PropertyRef Name="Id_meropriyatiya" />
+            </Principal>
+            <Dependent Role="Merop_Uchastnik">
+              <PropertyRef Name="Id_meropriyatiya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Merop_Uchastnik_Polzovateli">
+          <End Role="Polzovateli" Type="Self.Polzovateli" Multiplicity="0..1" />
+          <End Role="Merop_Uchastnik" Type="Self.Merop_Uchastnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Polzovateli">
+              <PropertyRef Name="Id_polzovatelya" />
+            </Principal>
+            <Dependent Role="Merop_Uchastnik">
+              <PropertyRef Name="Id_uchastnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Merop_Zhuri_Activnosti">
+          <End Role="Activnosti" Type="Self.Activnosti" Multiplicity="1" />
+          <End Role="Merop_Zhuri" Type="Self.Merop_Zhuri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activnosti">
+              <PropertyRef Name="Id_activnosti" />
+            </Principal>
+            <Dependent Role="Merop_Zhuri">
+              <PropertyRef Name="Id_activnosti" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Merop_Zhuri_Meropriyatiya">
+          <End Role="Meropriyatiya" Type="Self.Meropriyatiya" Multiplicity="1" />
+          <End Role="Merop_Zhuri" Type="Self.Merop_Zhuri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meropriyatiya">
+              <PropertyRef Name="Id_meropriyatiya" />
+            </Principal>
+            <Dependent Role="Merop_Zhuri">
+              <PropertyRef Name="Id_meropriyatiya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Merop_Zhuri_Polzovateli">
+          <End Role="Polzovateli" Type="Self.Polzovateli" Multiplicity="1" />
+          <End Role="Merop_Zhuri" Type="Self.Merop_Zhuri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Polzovateli">
+              <PropertyRef Name="Id_polzovatelya" />
+            </Principal>
+            <Dependent Role="Merop_Zhuri">
+              <PropertyRef Name="Id_zhuri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Polzovatel_Napravlenie_Napravlenie">
+          <End Role="Napravlenie" Type="Self.Napravlenie" Multiplicity="1" />
+          <End Role="Polzovatel_Napravlenie" Type="Self.Polzovatel_Napravlenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Napravlenie">
+              <PropertyRef Name="Id_napravlenie" />
+            </Principal>
+            <Dependent Role="Polzovatel_Napravlenie">
+              <PropertyRef Name="Id_napravlenie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Polzovatel_Napravlenie_Polzovateli">
+          <End Role="Polzovateli" Type="Self.Polzovateli" Multiplicity="1" />
+          <End Role="Polzovatel_Napravlenie" Type="Self.Polzovatel_Napravlenie" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Polzovateli">
+              <PropertyRef Name="Id_polzovatelya" />
+            </Principal>
+            <Dependent Role="Polzovatel_Napravlenie">
+              <PropertyRef Name="Id_polzovatelya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Polzovatel_Rol_Polzovateli">
+          <End Role="Polzovateli" Type="Self.Polzovateli" Multiplicity="1" />
+          <End Role="Polzovatel_Rol" Type="Self.Polzovatel_Rol" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Polzovateli">
+              <PropertyRef Name="Id_polzovatelya" />
+            </Principal>
+            <Dependent Role="Polzovatel_Rol">
+              <PropertyRef Name="Id_polzovatelya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Polzovatel_Rol_Roli">
+          <End Role="Roli" Type="Self.Roli" Multiplicity="1" />
+          <End Role="Polzovatel_Rol" Type="Self.Polzovatel_Rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roli">
+              <PropertyRef Name="Id_rol" />
+            </Principal>
+            <Dependent Role="Polzovatel_Rol">
+              <PropertyRef Name="Id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище bbbbbModelContainer">
+          <EntitySet Name="Activnost_Merop" EntityType="Self.Activnost_Merop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Activnosti" EntityType="Self.Activnosti" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Goroda" EntityType="Self.Goroda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Merop_Gorod" EntityType="Self.Merop_Gorod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Merop_TipMerop_Napravl" EntityType="Self.Merop_TipMerop_Napravl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Merop_Uchastnik" EntityType="Self.Merop_Uchastnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Merop_Zhuri" EntityType="Self.Merop_Zhuri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meropriyatiya" EntityType="Self.Meropriyatiya" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Napravlenie" EntityType="Self.Napravlenie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Polzovatel_Napravlenie" EntityType="Self.Polzovatel_Napravlenie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Polzovatel_Rol" EntityType="Self.Polzovatel_Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Polzovateli" EntityType="Self.Polzovateli" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roli" EntityType="Self.Roli" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Strani" EntityType="Self.Strani" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tip_meropriyatiya" EntityType="Self.Tip_meropriyatiya" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MeropriyatiyaMainW" EntityType="Self.MeropriyatiyaMainW" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[MeropriyatiyaMainW].[Id_meropriyatiya] AS [Id_meropriyatiya], 
+[MeropriyatiyaMainW].[Nazvanie] AS [Nazvanie], 
+[MeropriyatiyaMainW].[Data_nachala] AS [Data_nachala], 
+[MeropriyatiyaMainW].[Expr1] AS [Expr1]
+FROM [dbo].[MeropriyatiyaMainW] AS [MeropriyatiyaMainW]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Activnost_Merop_Activnosti" Association="Self.FK_Activnost_Merop_Activnosti">
+            <End Role="Activnosti" EntitySet="Activnosti" />
+            <End Role="Activnost_Merop" EntitySet="Activnost_Merop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activnost_Merop_Meropriyatiya" Association="Self.FK_Activnost_Merop_Meropriyatiya">
+            <End Role="Meropriyatiya" EntitySet="Meropriyatiya" />
+            <End Role="Activnost_Merop" EntitySet="Activnost_Merop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activnost_Merop_Polzovateli" Association="Self.FK_Activnost_Merop_Polzovateli">
+            <End Role="Polzovateli" EntitySet="Polzovateli" />
+            <End Role="Activnost_Merop" EntitySet="Activnost_Merop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Merop_Gorod_Goroda" Association="Self.FK_Merop_Gorod_Goroda">
+            <End Role="Goroda" EntitySet="Goroda" />
+            <End Role="Merop_Gorod" EntitySet="Merop_Gorod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Merop_Gorod_Meropriyatiya" Association="Self.FK_Merop_Gorod_Meropriyatiya">
+            <End Role="Meropriyatiya" EntitySet="Meropriyatiya" />
+            <End Role="Merop_Gorod" EntitySet="Merop_Gorod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Merop_TipMerop_Napravl_Meropriyatiya" Association="Self.FK_Merop_TipMerop_Napravl_Meropriyatiya">
+            <End Role="Meropriyatiya" EntitySet="Meropriyatiya" />
+            <End Role="Merop_TipMerop_Napravl" EntitySet="Merop_TipMerop_Napravl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Merop_TipMerop_Napravl_Napravlenie" Association="Self.FK_Merop_TipMerop_Napravl_Napravlenie">
+            <End Role="Napravlenie" EntitySet="Napravlenie" />
+            <End Role="Merop_TipMerop_Napravl" EntitySet="Merop_TipMerop_Napravl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Merop_TipMerop_Napravl_Tip_meropriyatiya" Association="Self.FK_Merop_TipMerop_Napravl_Tip_meropriyatiya">
+            <End Role="Tip_meropriyatiya" EntitySet="Tip_meropriyatiya" />
+            <End Role="Merop_TipMerop_Napravl" EntitySet="Merop_TipMerop_Napravl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Merop_Uchastnik_Meropriyatiya" Association="Self.FK_Merop_Uchastnik_Meropriyatiya">
+            <End Role="Meropriyatiya" EntitySet="Meropriyatiya" />
+            <End Role="Merop_Uchastnik" EntitySet="Merop_Uchastnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Merop_Uchastnik_Polzovateli" Association="Self.FK_Merop_Uchastnik_Polzovateli">
+            <End Role="Polzovateli" EntitySet="Polzovateli" />
+            <End Role="Merop_Uchastnik" EntitySet="Merop_Uchastnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Merop_Zhuri_Activnosti" Association="Self.FK_Merop_Zhuri_Activnosti">
+            <End Role="Activnosti" EntitySet="Activnosti" />
+            <End Role="Merop_Zhuri" EntitySet="Merop_Zhuri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Merop_Zhuri_Meropriyatiya" Association="Self.FK_Merop_Zhuri_Meropriyatiya">
+            <End Role="Meropriyatiya" EntitySet="Meropriyatiya" />
+            <End Role="Merop_Zhuri" EntitySet="Merop_Zhuri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Merop_Zhuri_Polzovateli" Association="Self.FK_Merop_Zhuri_Polzovateli">
+            <End Role="Polzovateli" EntitySet="Polzovateli" />
+            <End Role="Merop_Zhuri" EntitySet="Merop_Zhuri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Polzovatel_Napravlenie_Napravlenie" Association="Self.FK_Polzovatel_Napravlenie_Napravlenie">
+            <End Role="Napravlenie" EntitySet="Napravlenie" />
+            <End Role="Polzovatel_Napravlenie" EntitySet="Polzovatel_Napravlenie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Polzovatel_Napravlenie_Polzovateli" Association="Self.FK_Polzovatel_Napravlenie_Polzovateli">
+            <End Role="Polzovateli" EntitySet="Polzovateli" />
+            <End Role="Polzovatel_Napravlenie" EntitySet="Polzovatel_Napravlenie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Polzovatel_Rol_Polzovateli" Association="Self.FK_Polzovatel_Rol_Polzovateli">
+            <End Role="Polzovateli" EntitySet="Polzovateli" />
+            <End Role="Polzovatel_Rol" EntitySet="Polzovatel_Rol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Polzovatel_Rol_Roli" Association="Self.FK_Polzovatel_Rol_Roli">
+            <End Role="Roli" EntitySet="Roli" />
+            <End Role="Polzovatel_Rol" EntitySet="Polzovatel_Rol" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bbbbbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Activnost_Merop">
+          <Key>
+            <PropertyRef Name="Id_activnosti" />
+            <PropertyRef Name="Id_meropriyatiya" />
+          </Key>
+          <Property Name="Id_activnosti" Type="Int32" Nullable="false" />
+          <Property Name="Id_meropriyatiya" Type="Int32" Nullable="false" />
+          <Property Name="Data_provedeniya" Type="Int32" Nullable="false" />
+          <Property Name="Vremya" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Id_moderator" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Activnosti" Relationship="Self.FK_Activnost_Merop_Activnosti" FromRole="Activnost_Merop" ToRole="Activnosti" />
+          <NavigationProperty Name="Meropriyatiya" Relationship="Self.FK_Activnost_Merop_Meropriyatiya" FromRole="Activnost_Merop" ToRole="Meropriyatiya" />
+          <NavigationProperty Name="Polzovateli" Relationship="Self.FK_Activnost_Merop_Polzovateli" FromRole="Activnost_Merop" ToRole="Polzovateli" />
+        </EntityType>
+        <EntityType Name="Activnosti">
+          <Key>
+            <PropertyRef Name="Id_activnosti" />
+          </Key>
+          <Property Name="Id_activnosti" Type="Int32" Nullable="false" />
+          <Property Name="Nazvanie" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Activnost_Merop" Relationship="Self.FK_Activnost_Merop_Activnosti" FromRole="Activnosti" ToRole="Activnost_Merop" />
+          <NavigationProperty Name="Merop_Zhuri" Relationship="Self.FK_Merop_Zhuri_Activnosti" FromRole="Activnosti" ToRole="Merop_Zhuri" />
+        </EntityType>
+        <EntityType Name="Goroda">
+          <Key>
+            <PropertyRef Name="Id_gorod" />
+          </Key>
+          <Property Name="Id_gorod" Type="Int32" Nullable="false" />
+          <Property Name="Nazvanie" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ssilka" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Meropriyatiya" Relationship="Self.Merop_Gorod" FromRole="Goroda" ToRole="Meropriyatiya" />
+        </EntityType>
+        <EntityType Name="Merop_TipMerop_Napravl">
+          <Key>
+            <PropertyRef Name="Id_meropriyatiya" />
+          </Key>
+          <Property Name="Id_meropriyatiya" Type="Int32" Nullable="false" />
+          <Property Name="Id_tip_meropriyatiya" Type="Int32" Nullable="false" />
+          <Property Name="Id_napravlenie" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Meropriyatiya" Relationship="Self.FK_Merop_TipMerop_Napravl_Meropriyatiya" FromRole="Merop_TipMerop_Napravl" ToRole="Meropriyatiya" />
+          <NavigationProperty Name="Napravlenie" Relationship="Self.FK_Merop_TipMerop_Napravl_Napravlenie" FromRole="Merop_TipMerop_Napravl" ToRole="Napravlenie" />
+          <NavigationProperty Name="Tip_meropriyatiya" Relationship="Self.FK_Merop_TipMerop_Napravl_Tip_meropriyatiya" FromRole="Merop_TipMerop_Napravl" ToRole="Tip_meropriyatiya" />
+        </EntityType>
+        <EntityType Name="Merop_Uchastnik">
+          <Key>
+            <PropertyRef Name="Id_meropriyatiya" />
+          </Key>
+          <Property Name="Id_meropriyatiya" Type="Int32" Nullable="false" />
+          <Property Name="Id_uchastnika" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Meropriyatiya" Relationship="Self.FK_Merop_Uchastnik_Meropriyatiya" FromRole="Merop_Uchastnik" ToRole="Meropriyatiya" />
+          <NavigationProperty Name="Polzovateli" Relationship="Self.FK_Merop_Uchastnik_Polzovateli" FromRole="Merop_Uchastnik" ToRole="Polzovateli" />
+        </EntityType>
+        <EntityType Name="Merop_Zhuri">
+          <Key>
+            <PropertyRef Name="Id_meropriyatiya" />
+            <PropertyRef Name="Id_activnosti" />
+            <PropertyRef Name="Id_zhuri" />
+          </Key>
+          <Property Name="Id_meropriyatiya" Type="Int32" Nullable="false" />
+          <Property Name="Id_activnosti" Type="Int32" Nullable="false" />
+          <Property Name="Id_zhuri" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Activnosti" Relationship="Self.FK_Merop_Zhuri_Activnosti" FromRole="Merop_Zhuri" ToRole="Activnosti" />
+          <NavigationProperty Name="Meropriyatiya" Relationship="Self.FK_Merop_Zhuri_Meropriyatiya" FromRole="Merop_Zhuri" ToRole="Meropriyatiya" />
+          <NavigationProperty Name="Polzovateli" Relationship="Self.FK_Merop_Zhuri_Polzovateli" FromRole="Merop_Zhuri" ToRole="Polzovateli" />
+        </EntityType>
+        <EntityType Name="Meropriyatiya">
+          <Key>
+            <PropertyRef Name="Id_meropriyatiya" />
+          </Key>
+          <Property Name="Id_meropriyatiya" Type="Int32" Nullable="false" />
+          <Property Name="Nazvanie" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Data_nachala" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Prodolzhidelnoct" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Activnost_Merop" Relationship="Self.FK_Activnost_Merop_Meropriyatiya" FromRole="Meropriyatiya" ToRole="Activnost_Merop" />
+          <NavigationProperty Name="Merop_TipMerop_Napravl" Relationship="Self.FK_Merop_TipMerop_Napravl_Meropriyatiya" FromRole="Meropriyatiya" ToRole="Merop_TipMerop_Napravl" />
+          <NavigationProperty Name="Merop_Uchastnik" Relationship="Self.FK_Merop_Uchastnik_Meropriyatiya" FromRole="Meropriyatiya" ToRole="Merop_Uchastnik" />
+          <NavigationProperty Name="Merop_Zhuri" Relationship="Self.FK_Merop_Zhuri_Meropriyatiya" FromRole="Meropriyatiya" ToRole="Merop_Zhuri" />
+          <NavigationProperty Name="Goroda" Relationship="Self.Merop_Gorod" FromRole="Meropriyatiya" ToRole="Goroda" />
+        </EntityType>
+        <EntityType Name="Napravlenie">
+          <Key>
+            <PropertyRef Name="Id_napravlenie" />
+          </Key>
+          <Property Name="Id_napravlenie" Type="Int32" Nullable="false" />
+          <Property Name="Nazvanie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Merop_TipMerop_Napravl" Relationship="Self.FK_Merop_TipMerop_Napravl_Napravlenie" FromRole="Napravlenie" ToRole="Merop_TipMerop_Napravl" />
+          <NavigationProperty Name="Polzovateli" Relationship="Self.Polzovatel_Napravlenie" FromRole="Napravlenie" ToRole="Polzovateli" />
+        </EntityType>
+        <EntityType Name="Polzovateli">
+          <Key>
+            <PropertyRef Name="Id_polzovatelya" />
+          </Key>
+          <Property Name="Id_polzovatelya" Type="Int32" Nullable="false" />
+          <Property Name="FIO" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pochta" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Data_rozhdeniya" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Telephone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Parol" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Activnost_Merop" Relationship="Self.FK_Activnost_Merop_Polzovateli" FromRole="Polzovateli" ToRole="Activnost_Merop" />
+          <NavigationProperty Name="Merop_Uchastnik" Relationship="Self.FK_Merop_Uchastnik_Polzovateli" FromRole="Polzovateli" ToRole="Merop_Uchastnik" />
+          <NavigationProperty Name="Merop_Zhuri" Relationship="Self.FK_Merop_Zhuri_Polzovateli" FromRole="Polzovateli" ToRole="Merop_Zhuri" />
+          <NavigationProperty Name="Napravlenie" Relationship="Self.Polzovatel_Napravlenie" FromRole="Polzovateli" ToRole="Napravlenie" />
+          <NavigationProperty Name="Roli" Relationship="Self.Polzovatel_Rol" FromRole="Polzovateli" ToRole="Roli" />
+        </EntityType>
+        <EntityType Name="Roli">
+          <Key>
+            <PropertyRef Name="Id_rol" />
+          </Key>
+          <Property Name="Id_rol" Type="Int32" Nullable="false" />
+          <Property Name="Nazvanie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Polzovateli" Relationship="Self.Polzovatel_Rol" FromRole="Roli" ToRole="Polzovateli" />
+        </EntityType>
+        <EntityType Name="Strani">
+          <Key>
+            <PropertyRef Name="Id1" />
+          </Key>
+          <Property Name="Id1" Type="Int32" Nullable="false" />
+          <Property Name="Id2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Nazvanie" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nazvanie_Angl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tip_meropriyatiya">
+          <Key>
+            <PropertyRef Name="Id_tip_meropriyatiya" />
+          </Key>
+          <Property Name="Id_tip_meropriyatiya" Type="Int32" Nullable="false" />
+          <Property Name="Nazvanie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Merop_TipMerop_Napravl" Relationship="Self.FK_Merop_TipMerop_Napravl_Tip_meropriyatiya" FromRole="Tip_meropriyatiya" ToRole="Merop_TipMerop_Napravl" />
+        </EntityType>
+        <EntityType Name="MeropriyatiyaMainW">
+          <Key>
+            <PropertyRef Name="Id_meropriyatiya" />
+            <PropertyRef Name="Nazvanie" />
+            <PropertyRef Name="Data_nachala" />
+            <PropertyRef Name="Expr1" />
+          </Key>
+          <Property Name="Id_meropriyatiya" Type="Int32" Nullable="false" />
+          <Property Name="Nazvanie" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Data_nachala" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Expr1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Activnost_Merop_Activnosti">
+          <End Role="Activnosti" Type="Self.Activnosti" Multiplicity="1" />
+          <End Role="Activnost_Merop" Type="Self.Activnost_Merop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activnosti">
+              <PropertyRef Name="Id_activnosti" />
+            </Principal>
+            <Dependent Role="Activnost_Merop">
+              <PropertyRef Name="Id_activnosti" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Activnost_Merop_Meropriyatiya">
+          <End Role="Meropriyatiya" Type="Self.Meropriyatiya" Multiplicity="1" />
+          <End Role="Activnost_Merop" Type="Self.Activnost_Merop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meropriyatiya">
+              <PropertyRef Name="Id_meropriyatiya" />
+            </Principal>
+            <Dependent Role="Activnost_Merop">
+              <PropertyRef Name="Id_meropriyatiya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Activnost_Merop_Polzovateli">
+          <End Role="Polzovateli" Type="Self.Polzovateli" Multiplicity="1" />
+          <End Role="Activnost_Merop" Type="Self.Activnost_Merop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Polzovateli">
+              <PropertyRef Name="Id_polzovatelya" />
+            </Principal>
+            <Dependent Role="Activnost_Merop">
+              <PropertyRef Name="Id_meropriyatiya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Merop_Zhuri_Activnosti">
+          <End Role="Activnosti" Type="Self.Activnosti" Multiplicity="1" />
+          <End Role="Merop_Zhuri" Type="Self.Merop_Zhuri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activnosti">
+              <PropertyRef Name="Id_activnosti" />
+            </Principal>
+            <Dependent Role="Merop_Zhuri">
+              <PropertyRef Name="Id_activnosti" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Merop_TipMerop_Napravl_Meropriyatiya">
+          <End Role="Meropriyatiya" Type="Self.Meropriyatiya" Multiplicity="1" />
+          <End Role="Merop_TipMerop_Napravl" Type="Self.Merop_TipMerop_Napravl" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Meropriyatiya">
+              <PropertyRef Name="Id_meropriyatiya" />
+            </Principal>
+            <Dependent Role="Merop_TipMerop_Napravl">
+              <PropertyRef Name="Id_meropriyatiya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Merop_TipMerop_Napravl_Napravlenie">
+          <End Role="Napravlenie" Type="Self.Napravlenie" Multiplicity="1" />
+          <End Role="Merop_TipMerop_Napravl" Type="Self.Merop_TipMerop_Napravl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Napravlenie">
+              <PropertyRef Name="Id_napravlenie" />
+            </Principal>
+            <Dependent Role="Merop_TipMerop_Napravl">
+              <PropertyRef Name="Id_napravlenie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Merop_TipMerop_Napravl_Tip_meropriyatiya">
+          <End Role="Tip_meropriyatiya" Type="Self.Tip_meropriyatiya" Multiplicity="1" />
+          <End Role="Merop_TipMerop_Napravl" Type="Self.Merop_TipMerop_Napravl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tip_meropriyatiya">
+              <PropertyRef Name="Id_tip_meropriyatiya" />
+            </Principal>
+            <Dependent Role="Merop_TipMerop_Napravl">
+              <PropertyRef Name="Id_tip_meropriyatiya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Merop_Uchastnik_Meropriyatiya">
+          <End Role="Meropriyatiya" Type="Self.Meropriyatiya" Multiplicity="1" />
+          <End Role="Merop_Uchastnik" Type="Self.Merop_Uchastnik" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Meropriyatiya">
+              <PropertyRef Name="Id_meropriyatiya" />
+            </Principal>
+            <Dependent Role="Merop_Uchastnik">
+              <PropertyRef Name="Id_meropriyatiya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Merop_Uchastnik_Polzovateli">
+          <End Role="Polzovateli" Type="Self.Polzovateli" Multiplicity="0..1" />
+          <End Role="Merop_Uchastnik" Type="Self.Merop_Uchastnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Polzovateli">
+              <PropertyRef Name="Id_polzovatelya" />
+            </Principal>
+            <Dependent Role="Merop_Uchastnik">
+              <PropertyRef Name="Id_uchastnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Merop_Zhuri_Meropriyatiya">
+          <End Role="Meropriyatiya" Type="Self.Meropriyatiya" Multiplicity="1" />
+          <End Role="Merop_Zhuri" Type="Self.Merop_Zhuri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meropriyatiya">
+              <PropertyRef Name="Id_meropriyatiya" />
+            </Principal>
+            <Dependent Role="Merop_Zhuri">
+              <PropertyRef Name="Id_meropriyatiya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Merop_Zhuri_Polzovateli">
+          <End Role="Polzovateli" Type="Self.Polzovateli" Multiplicity="1" />
+          <End Role="Merop_Zhuri" Type="Self.Merop_Zhuri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Polzovateli">
+              <PropertyRef Name="Id_polzovatelya" />
+            </Principal>
+            <Dependent Role="Merop_Zhuri">
+              <PropertyRef Name="Id_zhuri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Merop_Gorod">
+          <End Role="Goroda" Type="Self.Goroda" Multiplicity="*" />
+          <End Role="Meropriyatiya" Type="Self.Meropriyatiya" Multiplicity="*" />
+        </Association>
+        <Association Name="Polzovatel_Napravlenie">
+          <End Role="Napravlenie" Type="Self.Napravlenie" Multiplicity="0..1" />
+          <End Role="Polzovateli" Type="Self.Polzovateli" Multiplicity="*" />
+        </Association>
+        <Association Name="Polzovatel_Rol">
+          <End Role="Polzovateli" Type="Self.Polzovateli" Multiplicity="*" />
+          <End Role="Roli" Type="Self.Roli" Multiplicity="0..1" />
+        </Association>
+        <EntityContainer Name="bbbbbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Activnost_Merop" EntityType="Self.Activnost_Merop" />
+          <EntitySet Name="Activnosti" EntityType="Self.Activnosti" />
+          <EntitySet Name="Goroda" EntityType="Self.Goroda" />
+          <EntitySet Name="Merop_TipMerop_Napravl" EntityType="Self.Merop_TipMerop_Napravl" />
+          <EntitySet Name="Merop_Uchastnik" EntityType="Self.Merop_Uchastnik" />
+          <EntitySet Name="Merop_Zhuri" EntityType="Self.Merop_Zhuri" />
+          <EntitySet Name="Meropriyatiya" EntityType="Self.Meropriyatiya" />
+          <EntitySet Name="Napravlenie" EntityType="Self.Napravlenie" />
+          <EntitySet Name="Polzovateli" EntityType="Self.Polzovateli" />
+          <EntitySet Name="Roli" EntityType="Self.Roli" />
+          <EntitySet Name="Strani" EntityType="Self.Strani" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tip_meropriyatiya" EntityType="Self.Tip_meropriyatiya" />
+          <EntitySet Name="MeropriyatiyaMainW" EntityType="Self.MeropriyatiyaMainW" />
+          <AssociationSet Name="FK_Activnost_Merop_Activnosti" Association="Self.FK_Activnost_Merop_Activnosti">
+            <End Role="Activnosti" EntitySet="Activnosti" />
+            <End Role="Activnost_Merop" EntitySet="Activnost_Merop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activnost_Merop_Meropriyatiya" Association="Self.FK_Activnost_Merop_Meropriyatiya">
+            <End Role="Meropriyatiya" EntitySet="Meropriyatiya" />
+            <End Role="Activnost_Merop" EntitySet="Activnost_Merop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activnost_Merop_Polzovateli" Association="Self.FK_Activnost_Merop_Polzovateli">
+            <End Role="Polzovateli" EntitySet="Polzovateli" />
+            <End Role="Activnost_Merop" EntitySet="Activnost_Merop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Merop_Zhuri_Activnosti" Association="Self.FK_Merop_Zhuri_Activnosti">
+            <End Role="Activnosti" EntitySet="Activnosti" />
+            <End Role="Merop_Zhuri" EntitySet="Merop_Zhuri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Merop_TipMerop_Napravl_Meropriyatiya" Association="Self.FK_Merop_TipMerop_Napravl_Meropriyatiya">
+            <End Role="Meropriyatiya" EntitySet="Meropriyatiya" />
+            <End Role="Merop_TipMerop_Napravl" EntitySet="Merop_TipMerop_Napravl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Merop_TipMerop_Napravl_Napravlenie" Association="Self.FK_Merop_TipMerop_Napravl_Napravlenie">
+            <End Role="Napravlenie" EntitySet="Napravlenie" />
+            <End Role="Merop_TipMerop_Napravl" EntitySet="Merop_TipMerop_Napravl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Merop_TipMerop_Napravl_Tip_meropriyatiya" Association="Self.FK_Merop_TipMerop_Napravl_Tip_meropriyatiya">
+            <End Role="Tip_meropriyatiya" EntitySet="Tip_meropriyatiya" />
+            <End Role="Merop_TipMerop_Napravl" EntitySet="Merop_TipMerop_Napravl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Merop_Uchastnik_Meropriyatiya" Association="Self.FK_Merop_Uchastnik_Meropriyatiya">
+            <End Role="Meropriyatiya" EntitySet="Meropriyatiya" />
+            <End Role="Merop_Uchastnik" EntitySet="Merop_Uchastnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Merop_Uchastnik_Polzovateli" Association="Self.FK_Merop_Uchastnik_Polzovateli">
+            <End Role="Polzovateli" EntitySet="Polzovateli" />
+            <End Role="Merop_Uchastnik" EntitySet="Merop_Uchastnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Merop_Zhuri_Meropriyatiya" Association="Self.FK_Merop_Zhuri_Meropriyatiya">
+            <End Role="Meropriyatiya" EntitySet="Meropriyatiya" />
+            <End Role="Merop_Zhuri" EntitySet="Merop_Zhuri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Merop_Zhuri_Polzovateli" Association="Self.FK_Merop_Zhuri_Polzovateli">
+            <End Role="Polzovateli" EntitySet="Polzovateli" />
+            <End Role="Merop_Zhuri" EntitySet="Merop_Zhuri" />
+          </AssociationSet>
+          <AssociationSet Name="Merop_Gorod" Association="Self.Merop_Gorod">
+            <End Role="Goroda" EntitySet="Goroda" />
+            <End Role="Meropriyatiya" EntitySet="Meropriyatiya" />
+          </AssociationSet>
+          <AssociationSet Name="Polzovatel_Napravlenie" Association="Self.Polzovatel_Napravlenie">
+            <End Role="Napravlenie" EntitySet="Napravlenie" />
+            <End Role="Polzovateli" EntitySet="Polzovateli" />
+          </AssociationSet>
+          <AssociationSet Name="Polzovatel_Rol" Association="Self.Polzovatel_Rol">
+            <End Role="Polzovateli" EntitySet="Polzovateli" />
+            <End Role="Roli" EntitySet="Roli" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище bbbbbModelContainer" CdmEntityContainer="bbbbbEntities">
+          <EntitySetMapping Name="Activnost_Merop">
+            <EntityTypeMapping TypeName="bbbbbModel.Activnost_Merop">
+              <MappingFragment StoreEntitySet="Activnost_Merop">
+                <ScalarProperty Name="Id_activnosti" ColumnName="Id_activnosti" />
+                <ScalarProperty Name="Id_meropriyatiya" ColumnName="Id_meropriyatiya" />
+                <ScalarProperty Name="Data_provedeniya" ColumnName="Data_provedeniya" />
+                <ScalarProperty Name="Vremya" ColumnName="Vremya" />
+                <ScalarProperty Name="Id_moderator" ColumnName="Id_moderator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Activnosti">
+            <EntityTypeMapping TypeName="bbbbbModel.Activnosti">
+              <MappingFragment StoreEntitySet="Activnosti">
+                <ScalarProperty Name="Id_activnosti" ColumnName="Id_activnosti" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Goroda">
+            <EntityTypeMapping TypeName="bbbbbModel.Goroda">
+              <MappingFragment StoreEntitySet="Goroda">
+                <ScalarProperty Name="Id_gorod" ColumnName="Id_gorod" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+                <ScalarProperty Name="Ssilka" ColumnName="Ssilka" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Merop_TipMerop_Napravl">
+            <EntityTypeMapping TypeName="bbbbbModel.Merop_TipMerop_Napravl">
+              <MappingFragment StoreEntitySet="Merop_TipMerop_Napravl">
+                <ScalarProperty Name="Id_meropriyatiya" ColumnName="Id_meropriyatiya" />
+                <ScalarProperty Name="Id_tip_meropriyatiya" ColumnName="Id_tip_meropriyatiya" />
+                <ScalarProperty Name="Id_napravlenie" ColumnName="Id_napravlenie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Merop_Uchastnik">
+            <EntityTypeMapping TypeName="bbbbbModel.Merop_Uchastnik">
+              <MappingFragment StoreEntitySet="Merop_Uchastnik">
+                <ScalarProperty Name="Id_meropriyatiya" ColumnName="Id_meropriyatiya" />
+                <ScalarProperty Name="Id_uchastnika" ColumnName="Id_uchastnika" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Merop_Zhuri">
+            <EntityTypeMapping TypeName="bbbbbModel.Merop_Zhuri">
+              <MappingFragment StoreEntitySet="Merop_Zhuri">
+                <ScalarProperty Name="Id_meropriyatiya" ColumnName="Id_meropriyatiya" />
+                <ScalarProperty Name="Id_activnosti" ColumnName="Id_activnosti" />
+                <ScalarProperty Name="Id_zhuri" ColumnName="Id_zhuri" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meropriyatiya">
+            <EntityTypeMapping TypeName="bbbbbModel.Meropriyatiya">
+              <MappingFragment StoreEntitySet="Meropriyatiya">
+                <ScalarProperty Name="Id_meropriyatiya" ColumnName="Id_meropriyatiya" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+                <ScalarProperty Name="Data_nachala" ColumnName="Data_nachala" />
+                <ScalarProperty Name="Prodolzhidelnoct" ColumnName="Prodolzhidelnoct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Napravlenie">
+            <EntityTypeMapping TypeName="bbbbbModel.Napravlenie">
+              <MappingFragment StoreEntitySet="Napravlenie">
+                <ScalarProperty Name="Id_napravlenie" ColumnName="Id_napravlenie" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Polzovateli">
+            <EntityTypeMapping TypeName="bbbbbModel.Polzovateli">
+              <MappingFragment StoreEntitySet="Polzovateli">
+                <ScalarProperty Name="Id_polzovatelya" ColumnName="Id_polzovatelya" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="Pochta" ColumnName="Pochta" />
+                <ScalarProperty Name="Data_rozhdeniya" ColumnName="Data_rozhdeniya" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Parol" ColumnName="Parol" />
+                <ScalarProperty Name="Pol" ColumnName="Pol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roli">
+            <EntityTypeMapping TypeName="bbbbbModel.Roli">
+              <MappingFragment StoreEntitySet="Roli">
+                <ScalarProperty Name="Id_rol" ColumnName="Id_rol" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Strani">
+            <EntityTypeMapping TypeName="bbbbbModel.Strani">
+              <MappingFragment StoreEntitySet="Strani">
+                <ScalarProperty Name="Id1" ColumnName="Id1" />
+                <ScalarProperty Name="Id2" ColumnName="Id2" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+                <ScalarProperty Name="Nazvanie_Angl" ColumnName="Nazvanie_Angl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="bbbbbModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tip_meropriyatiya">
+            <EntityTypeMapping TypeName="bbbbbModel.Tip_meropriyatiya">
+              <MappingFragment StoreEntitySet="Tip_meropriyatiya">
+                <ScalarProperty Name="Id_tip_meropriyatiya" ColumnName="Id_tip_meropriyatiya" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeropriyatiyaMainW">
+            <EntityTypeMapping TypeName="bbbbbModel.MeropriyatiyaMainW">
+              <MappingFragment StoreEntitySet="MeropriyatiyaMainW">
+                <ScalarProperty Name="Id_meropriyatiya" ColumnName="Id_meropriyatiya" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+                <ScalarProperty Name="Data_nachala" ColumnName="Data_nachala" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Merop_Gorod" TypeName="bbbbbModel.Merop_Gorod" StoreEntitySet="Merop_Gorod">
+            <EndProperty Name="Goroda">
+              <ScalarProperty Name="Id_gorod" ColumnName="Id_gorod" />
+            </EndProperty>
+            <EndProperty Name="Meropriyatiya">
+              <ScalarProperty Name="Id_meropriyatiya" ColumnName="Id_meropriyatiya" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Polzovatel_Napravlenie" TypeName="bbbbbModel.Polzovatel_Napravlenie" StoreEntitySet="Polzovatel_Napravlenie">
+            <EndProperty Name="Napravlenie">
+              <ScalarProperty Name="Id_napravlenie" ColumnName="Id_napravlenie" />
+            </EndProperty>
+            <EndProperty Name="Polzovateli">
+              <ScalarProperty Name="Id_polzovatelya" ColumnName="Id_polzovatelya" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Polzovatel_Rol" TypeName="bbbbbModel.Polzovatel_Rol" StoreEntitySet="Polzovatel_Rol">
+            <EndProperty Name="Polzovateli">
+              <ScalarProperty Name="Id_polzovatelya" ColumnName="Id_polzovatelya" />
+            </EndProperty>
+            <EndProperty Name="Roli">
+              <ScalarProperty Name="Id_rol" ColumnName="Id_rol" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

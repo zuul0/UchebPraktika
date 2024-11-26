@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6640e04c3c8b4b809920fd0c21a3cdac" Name="Diagram1">
+        <EntityTypeShape EntityType="bbbbbModel.Activnost_Merop" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbbbbModel.Activnosti" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbbbbModel.Goroda" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbbbbModel.Merop_TipMerop_Napravl" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbbbbModel.Merop_Uchastnik" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbbbbModel.Merop_Zhuri" Width="1.5" PointX="8.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbbbbModel.Meropriyatiya" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbbbbModel.Napravlenie" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbbbbModel.Polzovateli" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbbbbModel.Roli" Width="1.5" PointX="5.25" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbbbbModel.Strani" Width="1.5" PointX="2.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbbbbModel.sysdiagrams" Width="1.5" PointX="4.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbbbbModel.Tip_meropriyatiya" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbbbbModel.MeropriyatiyaMainW" Width="1.5" PointX="5.75" PointY="4.375" IsExpanded="true" />
+        <AssociationConnector Association="bbbbbModel.FK_Activnost_Merop_Activnosti" ManuallyRouted="false" />
+        <AssociationConnector Association="bbbbbModel.FK_Activnost_Merop_Meropriyatiya" ManuallyRouted="false" />
+        <AssociationConnector Association="bbbbbModel.FK_Activnost_Merop_Polzovateli" ManuallyRouted="false" />
+        <AssociationConnector Association="bbbbbModel.FK_Merop_Zhuri_Activnosti" ManuallyRouted="false" />
+        <AssociationConnector Association="bbbbbModel.FK_Merop_TipMerop_Napravl_Meropriyatiya" ManuallyRouted="false" />
+        <AssociationConnector Association="bbbbbModel.FK_Merop_TipMerop_Napravl_Napravlenie" ManuallyRouted="false" />
+        <AssociationConnector Association="bbbbbModel.FK_Merop_TipMerop_Napravl_Tip_meropriyatiya" ManuallyRouted="false" />
+        <AssociationConnector Association="bbbbbModel.FK_Merop_Uchastnik_Meropriyatiya" ManuallyRouted="false" />
+        <AssociationConnector Association="bbbbbModel.FK_Merop_Uchastnik_Polzovateli" ManuallyRouted="false" />
+        <AssociationConnector Association="bbbbbModel.FK_Merop_Zhuri_Meropriyatiya" ManuallyRouted="false" />
+        <AssociationConnector Association="bbbbbModel.FK_Merop_Zhuri_Polzovateli" ManuallyRouted="false" />
+        <AssociationConnector Association="bbbbbModel.Merop_Gorod" ManuallyRouted="false" />
+        <AssociationConnector Association="bbbbbModel.Polzovatel_Napravlenie" ManuallyRouted="false" />
+        <AssociationConnector Association="bbbbbModel.Polzovatel_Rol" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

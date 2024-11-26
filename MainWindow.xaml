@@ -1,0 +1,42 @@
+﻿<Window x:Class="UchebPraktika.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UchebPraktika"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Button Content="Авторизация" HorizontalAlignment="Right" Click="AutorizationButton_Click"/>
+            <StackPanel Orientation="Horizontal">
+                <ComboBox Width="120" Margin="0,0,5,0">
+
+                </ComboBox>
+                <DatePicker>
+
+                </DatePicker>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <DataGrid x:Name="MeropriyatiyaMainW" AutoGenerateColumns="False"  ItemsSource="{Binding}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Логотип" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Logo}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Название мероприятия" Binding="{Binding Nazvanie}" Width="*"/>
+                    <DataGridTextColumn Header="Направление" Binding="{Binding Expr1}" Width="*"/>
+                <DataGridTextColumn Header="Дата" Binding="{Binding Data_nachala}" Width="*"/>
+            </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>
