@@ -14,7 +14,7 @@
         <Grid Grid.Row="0">
             <Button Content="Авторизация" HorizontalAlignment="Right" Click="AutorizationButton_Click"/>
             <StackPanel Orientation="Horizontal">
-                <ComboBox Width="120" Margin="0,0,5,0">
+                <ComboBox  x:Name="FilterDirectionComboBox"  Width="120" Margin="0,0,5,0">
 
                 </ComboBox>
                 <DatePicker>
@@ -23,7 +23,13 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
-            <DataGrid x:Name="MeropriyatiyaMainW" AutoGenerateColumns="False"  ItemsSource="{Binding}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="181*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="433*"/>
+                <ColumnDefinition Width="126*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid x:Name="MeropriyatiyaMainW" AutoGenerateColumns="False"  ItemsSource="{Binding}" Grid.ColumnSpan="4" SelectionChanged="MeropriyatiyaMainW_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Логотип" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
@@ -34,8 +40,8 @@
                     </DataGridTemplateColumn>
                     <DataGridTextColumn Header="Название мероприятия" Binding="{Binding Nazvanie}" Width="*"/>
                     <DataGridTextColumn Header="Направление" Binding="{Binding Expr1}" Width="*"/>
-                <DataGridTextColumn Header="Дата" Binding="{Binding Data_nachala}" Width="*"/>
-            </DataGrid.Columns>
+                    <DataGridTextColumn Header="Дата" Binding="{Binding Data_nachala}" Width="*"/>
+                </DataGrid.Columns>
             </DataGrid>
         </Grid>
     </Grid>

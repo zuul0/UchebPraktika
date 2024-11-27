@@ -67,7 +67,7 @@
 
        
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
-            <Button Content="Сохранить" x:Name="SaveBtn" Width="100" />
+            <Button Content="Сохранить" x:Name="SaveBtn" Width="100" Click="SaveBtn_Click" />
             <Button Content="Отмена"  x:Name="CancelBtn"  Width="100" Click="CancelBtn_Click"/>
         </StackPanel>
     </Grid>

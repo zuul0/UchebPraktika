@@ -9,7 +9,7 @@ namespace UchebPraktika
     public partial class Autorization : Window
     {
         private readonly bbbbbEntities bd = new bbbbbEntities();
-        private string CaptchaOtvet;
+        public string CaptchaOtvet;
         private int logAttempt = 0;
         private DispatcherTimer timer;
 
@@ -57,7 +57,7 @@ namespace UchebPraktika
             timer.Stop(); // Остановка таймера
         }
 
-        private void SaveUserCredentials()
+        public void SaveUserCredentials()
         {
             try
             {
@@ -80,7 +80,7 @@ namespace UchebPraktika
             }
         }
 
-        private void AuthorizeUser()
+        public void AuthorizeUser()
         {
             try
             {

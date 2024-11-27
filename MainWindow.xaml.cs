@@ -22,7 +22,7 @@ namespace UchebPraktika
     /// </summary>
     public partial class MainWindow : Window
     {
-        bbbbbEntities context = new     bbbbbEntities ();
+        bbbbbEntities context = new  bbbbbEntities ();
         public MainWindow()
         {
             InitializeComponent();
@@ -50,6 +50,11 @@ namespace UchebPraktika
             Autorization autorization = new Autorization();
             autorization.Show();
             this.Close();
+
+        }
+
+        private void MeropriyatiyaMainW_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
         }
     }

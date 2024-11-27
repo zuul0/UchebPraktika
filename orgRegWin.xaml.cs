@@ -29,5 +29,12 @@ namespace UchebPraktika
             OrganizatorWindow organizatorWindow = new OrganizatorWindow();
             organizatorWindow.Show();
         }
+
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OrganizatorWindow organizatorWindow = new OrganizatorWindow();
+            organizatorWindow.Show();
+
+        }
     }
 } 
