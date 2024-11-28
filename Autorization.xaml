@@ -13,14 +13,14 @@
         </TextBlock>
         <UniformGrid Columns="2">
             <TextBlock > ID Number</TextBlock>
-            <TextBox x:FieldModifier="public"  x:Name="Login" ></TextBox>
+            <TextBox x:Name="Login" ></TextBox>
             <TextBlock > Пароль</TextBlock>
-            <PasswordBox x:FieldModifier="public" x:Name="Password"></PasswordBox>
+            <PasswordBox  x:Name="Password"></PasswordBox>
         </UniformGrid>
-        <CheckBox x:FieldModifier="public" Margin="10" x:Name="save" >Запомнить меня</CheckBox>
-        <captcha:Captcha x:FieldModifier="public" x:Name="CaptchaTextBox"/>
-        <TextBox x:FieldModifier="public"  x:Name="TextBoxCap"/>
-        <Button x:FieldModifier="public"  Content="Войти" Margin="20" x:Name="enter" Click="enter_Click" />
+        <CheckBox  Margin="10" x:Name="save"> Запомнить меня </CheckBox>
+        <captcha:Captcha x:Name="CaptchaTextBox" Visibility="Collapsed"/>
+        <TextBox Visibility="Collapsed"  x:Name="TextBoxCap"/>
+        <Button  Content="Войти" Margin="20" x:Name="enter" Click="enter_Click" />
         <Button Content="На Главную" Margin="20" x:Name="backBtn" Click="back_Click" />
 
     </StackPanel>

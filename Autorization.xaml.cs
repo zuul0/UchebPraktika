@@ -17,181 +17,153 @@ namespace UchebPraktika
         {
             InitializeComponent();
             InitializeTimer();
-            GenerateCaptcha();
+            GenerateCaptcha(); 
         }
 
         private void InitializeTimer()
         {
             timer = new DispatcherTimer
             {
-                Interval = TimeSpan.FromSeconds(10) // Таймер блокировки 10 секунд
+                Interval = TimeSpan.FromSeconds(10) 
             };
-            timer.Tick += UnblockSystem;
+            timer.Tick += UnblockSystem; 
         }
 
         private void GenerateCaptcha()
         {
-            CaptchaTextBox.CreateCaptcha(Captcha.LetterOption.Alphanumeric, 4); // Генерация CAPTCHA
-            CaptchaOtvet = CaptchaTextBox.CaptchaText; // Сохранение правильного ответа
+            CaptchaTextBox.CreateCaptcha(Captcha.LetterOption.Alphanumeric, 4);
+            CaptchaOtvet = CaptchaTextBox.CaptchaText; 
         }
 
         private void BlockSystem()
         {
-            // Отключение элементов интерфейса
             Login.IsEnabled = false;
             Password.IsEnabled = false;
             enter.IsEnabled = false;
             MessageBox.Show("Система заблокирована на 10 секунд.");
-
-            timer.Start(); // Запуск таймера
+            timer.Start();
         }
 
         private void UnblockSystem(object sender, EventArgs e)
         {
-            // Включение элементов интерфейса
             Login.IsEnabled = true;
             Password.IsEnabled = true;
             enter.IsEnabled = true;
             logAttempt = 0; // Сброс счетчика попыток
-
-            timer.Stop(); // Остановка таймера
+            timer.Stop(); 
+            GenerateCaptcha();
+            CaptchaTextBox.Visibility = Visibility.Visible;
+            TextBoxCap.Visibility = Visibility.Visible;
         }
 
-        public void SaveUserCredentials()
+        public bool ValidatePassword(string x)
         {
-            try
+            bool hasDigit = false, hasLower = false, hasUpper = false, hasSpecialChar = false;
+            foreach (char c in x)
             {
-                if (save.IsChecked == true)
-                {
-                    if (string.IsNullOrWhiteSpace(Login.Text) || string.IsNullOrWhiteSpace(Password.Password))
-                    {
-                        MessageBox.Show("Невозможно сохранить пустые учетные данные.");
-                        return;
-                    }
-                    // Сохранение данных в настройках приложения
-                    Properties.Settings.Default.DefaultLogin = Login.Text;
-                    Properties.Settings.Default.DefaultPass = Password.Password;
-                    Properties.Settings.Default.Save();
-                }
+                if (char.IsDigit(c)) hasDigit = true;
+                else if (char.IsLower(c)) hasLower = true;
+                else if (char.IsUpper(c)) hasUpper = true;
+                else if (!char.IsLetterOrDigit(c)) hasSpecialChar = true;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка сохранения учетных данных: {ex.Message}");
+
+            if (x.Length < 6) { 
+                MessageBox.Show("Пароль должен содержать не менее 6 символов."); return false;
             }
+            if (!hasUpper) {
+                MessageBox.Show("В пароле не хваатает заглавной буквы"); return false;
+            }
+            if (!hasLower) {
+                MessageBox.Show("В пароле не хватает строчной буквы"); return false; 
+            }
+            if (!hasDigit) {
+                MessageBox.Show("В пароле не хватает цифры"); return false; 
+            }
+            if (!hasSpecialChar) {
+                MessageBox.Show("Осталось только понять, какой символ ты забыл прописать." +
+                    " Возможно, дальше ты сможешь войти в свой аккаунт"); return false;
+            }
+
+            return true; 
         }
 
-        public void AuthorizeUser()
+        public bool AuthorizeUser(string inputLogin, string inputPassword)
         {
-            try
+            if (!int.TryParse(inputLogin.Trim(), out int id))
             {
-                if (!int.TryParse(Login.Text.Trim(), out int id))
-                {
-                    MessageBox.Show("Некорректный ID пользователя. Введите числовое значение.");
-                    return;
-                }
-
-                string pass = Password.Password.Trim();
-                if (string.IsNullOrWhiteSpace(pass))
-                {
-                    MessageBox.Show("Пароль не может быть пустым.");
-                    return;
-                }
-
-                var polzovatel = bd.Polzovateli.FirstOrDefault(x => x.Id_polzovatelya == id && x.Parol == pass);
-
-                if (polzovatel == null)
-                {
-                    MessageBox.Show("Неверный ID или пароль.");
-                    return;
-                }
-
-                if (TextBoxCap.Text.Trim() != CaptchaOtvet)
-                {
-                    MessageBox.Show("Неверная CAPTCHA. Попробуйте снова.");
-                    GenerateCaptcha();
-                    return;
-                }
-
-                // Проверка ролей пользователя
-                string rol = polzovatel.Roli.Nazvanie;
-                switch (rol)
-                {
-                    case "участник":
-                        new UchastnikWindows().Show();
-                        break;
-                    case "модератор":
-                        new ModeratorWindow().Show();
-                        break;
-                    case "организатор":
-                        new OrganizatorWindow().Show();
-                        break;
-                    case "жюри":
-                        new ZhuriWindow().Show();
-                        break;
-                    default:
-                        MessageBox.Show("Роль пользователя не распознана.");
-                        return;
-                }
-
-                this.Close();
+                MessageBox.Show("Некорректный ID пользователя. Введите числовое значение.");
+                return false;
             }
-            catch (System.Data.EntityException ex)
+
+            if (!ValidatePassword(inputPassword)) return false;
+
+            var user = bd.Polzovateli.FirstOrDefault(u => u.Id_polzovatelya == id && u.Parol == inputPassword);
+            if (user == null)
             {
-                MessageBox.Show("Ошибка подключения к базе данных: " + ex.Message);
+                MessageBox.Show("Неверный логин или пароль.");
+                return false;
             }
-            catch (Exception ex)
+
+            switch (user.Roli.Nazvanie)
             {
-                MessageBox.Show("Произошла ошибка: " + ex.Message);
+                case "участник": new UchastnikWindows().Show(); break;
+                case "модератор": new ModeratorWindow().Show(); break;
+                case "организатор": new OrganizatorWindow().Show(); break;
+                case "жюри": new ZhuriWindow().Show(); break;
+                default: MessageBox.Show("Роль пользователя не распознана."); return false;
             }
+
+            MessageBox.Show("Авторизация успешна!");
+            this.Close();
+            return true;
         }
 
         private void enter_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (logAttempt >= 3)
-                {
-                    BlockSystem();
-                    return;
-                }
-
                 string inputLogin = Login.Text.Trim();
                 string inputPassword = Password.Password.Trim();
 
-                // Проверка на пустые поля
                 if (string.IsNullOrWhiteSpace(inputLogin) || string.IsNullOrWhiteSpace(inputPassword))
                 {
                     MessageBox.Show("Пожалуйста, заполните все поля.");
                     return;
                 }
 
-                // Проверка длины пароля
-                if (inputPassword.Length < 6)
-                {
-                    MessageBox.Show("Пароль должен содержать не менее 6 символов.");
-                    return;
-                }
-
-                // Проверка CAPTCHA
-                if (TextBoxCap.Text.Trim() != CaptchaOtvet)
+                if (CaptchaTextBox.Visibility == Visibility.Visible && TextBoxCap.Text.Trim() != CaptchaOtvet)
                 {
                     MessageBox.Show("Неверная CAPTCHA. Попробуйте снова.");
                     GenerateCaptcha();
+                    logAttempt++;
+                    CheckAttempts();
                     return;
                 }
-
-                SaveUserCredentials(); // Сохранение данных
-                AuthorizeUser(); // Авторизация
+                if (AuthorizeUser(inputLogin, inputPassword))
+                {
+                    logAttempt = 0;
+                    CaptchaTextBox.Visibility = Visibility.Collapsed;
+                    TextBoxCap.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    logAttempt++;
+                    CheckAttempts();
+                }
             }
             catch (Exception ex)
             {
-                logAttempt++; // Увеличение счетчика попыток
-                MessageBox.Show($"Произошла ошибка: {ex.Message}. Осталось попыток: {3 - logAttempt}");
-
-                if (logAttempt >= 3)
-                {
-                    BlockSystem(); // Блокировка после 3 попыток
-                }
+                MessageBox.Show($"Произошла ошибка: {ex.Message}");
+                logAttempt++;
+                CheckAttempts();
+            }
+        }
+        private void CheckAttempts()
+        {
+            if (logAttempt >= 3)
+            {
+                BlockSystem();
+               
             }
         }
 
