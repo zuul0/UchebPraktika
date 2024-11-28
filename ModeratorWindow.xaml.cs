@@ -23,5 +23,11 @@ namespace UchebPraktika
         {
             InitializeComponent();
         }
+
+        private void goback_click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+        }
     }
 }

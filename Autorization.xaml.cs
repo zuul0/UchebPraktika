@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
 using EasyCaptcha.Wpf;
+using Microsoft.IdentityModel.Protocols;
 
 namespace UchebPraktika
 {
@@ -12,12 +14,38 @@ namespace UchebPraktika
         public string CaptchaOtvet;
         private int logAttempt = 0;
         private DispatcherTimer timer;
+         
 
         public Autorization()
         {
             InitializeComponent();
+
+
             InitializeTimer();
-            GenerateCaptcha(); 
+            GenerateCaptcha();
+            LoadCredentials();
+        }
+
+
+        private void LoadCredentials()
+        {
+            string savedUserId = ConfigurationManager.AppSettings["UserID"];
+            string savedPassword = ConfigurationManager.AppSettings["UserPassword"];
+
+            if (!string.IsNullOrEmpty(savedUserId) && !string.IsNullOrEmpty(savedPassword))
+            {
+                Login.Text = savedUserId;
+                Password.Password = savedPassword;
+            }
+        }
+
+        private void SaveCredentials(string userId, string password)
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings["UserID"].Value = userId;
+            config.AppSettings.Settings["UserPassword"].Value = password;
+            config.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
         }
 
         private void InitializeTimer()
@@ -55,8 +83,16 @@ namespace UchebPraktika
             CaptchaTextBox.Visibility = Visibility.Visible;
             TextBoxCap.Visibility = Visibility.Visible;
         }
+        private void CheckAttempts()
+        {
+            if (logAttempt >= 3)
+            {
+                BlockSystem();
 
-        public bool ValidatePassword(string x)
+            }
+        }
+
+        public int ValidatePassword(string x)
         {
             bool hasDigit = false, hasLower = false, hasUpper = false, hasSpecialChar = false;
             foreach (char c in x)
@@ -67,40 +103,64 @@ namespace UchebPraktika
                 else if (!char.IsLetterOrDigit(c)) hasSpecialChar = true;
             }
 
-            if (x.Length < 6) { 
-                MessageBox.Show("Пароль должен содержать не менее 6 символов."); return false;
+            if (x.Length < 6)
+            {
+                MessageBox.Show("Пароль должен содержать не менее 6 символов.");
+                return 1; 
             }
-            if (!hasUpper) {
-                MessageBox.Show("В пароле не хваатает заглавной буквы"); return false;
+            if (!hasUpper)
+            {
+                MessageBox.Show("Пароль должен содержать хотя бы одну заглавную букву.");
+                return 2;
             }
-            if (!hasLower) {
-                MessageBox.Show("В пароле не хватает строчной буквы"); return false; 
+            if (!hasLower)
+            {
+                MessageBox.Show("Пароль должен содержать хотя бы одну строчную букву.");
+                return 3; 
             }
-            if (!hasDigit) {
-                MessageBox.Show("В пароле не хватает цифры"); return false; 
+            if (!hasDigit)
+            {
+                MessageBox.Show("Пароль должен содержать хотя бы одну цифру.");
+                return 4; 
             }
-            if (!hasSpecialChar) {
-                MessageBox.Show("Осталось только понять, какой символ ты забыл прописать." +
-                    " Возможно, дальше ты сможешь войти в свой аккаунт"); return false;
+            if (!hasSpecialChar)
+            {
+                MessageBox.Show("Пароль должен содержать хотя бы один специальный символ.");
+                return 5; 
             }
 
-            return true; 
+            return 0; 
         }
+
 
         public bool AuthorizeUser(string inputLogin, string inputPassword)
         {
             if (!int.TryParse(inputLogin.Trim(), out int id))
             {
-                MessageBox.Show("Некорректный ID пользователя. Введите числовое значение.");
+                ErrorText.Content = "Некорректный ID пользователя. Введите числовое значение.";
+                ErrorText.Visibility = Visibility.Visible;
                 return false;
             }
 
-            if (!ValidatePassword(inputPassword)) return false;
-
-            var user = bd.Polzovateli.FirstOrDefault(u => u.Id_polzovatelya == id && u.Parol == inputPassword);
+            var user = bd.Polzovateli.FirstOrDefault(u => u.Id_polzovatelya == id);
             if (user == null)
             {
-                MessageBox.Show("Неверный логин или пароль.");
+                ErrorText.Content = "Пользователь с таким ID не найден.";
+                ErrorText.Visibility = Visibility.Visible;
+                return false;
+            }
+
+            if (user.Parol != inputPassword)
+            {
+                ErrorText.Content = "Неверный пароль. В пароле " +
+                    "не менее 6 символов;\r\n• заглавные и строчные буквы;\r\n• не менее одного спецсимвола;\r\n• не менее одной цифры.";
+                ErrorText.Visibility = Visibility.Visible;
+                return false;
+            }
+
+            int validationResult = ValidatePassword(inputPassword);
+            if (validationResult != 0) // Если не 0, пароль не соответствует требованиям
+            {
                 return false;
             }
 
@@ -108,11 +168,15 @@ namespace UchebPraktika
             {
                 case "участник": new UchastnikWindows().Show(); break;
                 case "модератор": new ModeratorWindow().Show(); break;
-                case "организатор": new OrganizatorWindow().Show(); break;
+                case "организатор": new OrganizatorWindow(user).Show(); break;
                 case "жюри": new ZhuriWindow().Show(); break;
-                default: MessageBox.Show("Роль пользователя не распознана."); return false;
+                default:
+                    ErrorText.Content = "Роль пользователя не распознана.";
+                    ErrorText.Visibility = Visibility.Visible;
+                    return false;
             }
 
+            ErrorText.Visibility = Visibility.Collapsed;
             MessageBox.Show("Авторизация успешна!");
             this.Close();
             return true;
@@ -124,6 +188,7 @@ namespace UchebPraktika
             {
                 string inputLogin = Login.Text.Trim();
                 string inputPassword = Password.Password.Trim();
+                
 
                 if (string.IsNullOrWhiteSpace(inputLogin) || string.IsNullOrWhiteSpace(inputPassword))
                 {
@@ -144,6 +209,7 @@ namespace UchebPraktika
                     logAttempt = 0;
                     CaptchaTextBox.Visibility = Visibility.Collapsed;
                     TextBoxCap.Visibility = Visibility.Collapsed;
+                    SaveCredentials(inputLogin, inputPassword);
                 }
                 else
                 {
@@ -158,14 +224,7 @@ namespace UchebPraktika
                 CheckAttempts();
             }
         }
-        private void CheckAttempts()
-        {
-            if (logAttempt >= 3)
-            {
-                BlockSystem();
-               
-            }
-        }
+      
 
         private void back_Click(object sender, RoutedEventArgs e)
         {

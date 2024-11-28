@@ -17,8 +17,10 @@ namespace UchebPraktika
     /// <summary>
     /// Логика взаимодействия для orgRegWin.xaml
     /// </summary>
+    /// 
     public partial class orgRegWin : Window
     {
+       
         public orgRegWin()
         {
             InitializeComponent();
@@ -26,14 +28,12 @@ namespace UchebPraktika
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
-            OrganizatorWindow organizatorWindow = new OrganizatorWindow();
-            organizatorWindow.Show();
+           
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            OrganizatorWindow organizatorWindow = new OrganizatorWindow();
-            organizatorWindow.Show();
+           
 
         }
     }

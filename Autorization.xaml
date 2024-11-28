@@ -21,8 +21,8 @@
         <captcha:Captcha x:Name="CaptchaTextBox" Visibility="Collapsed"/>
         <TextBox Visibility="Collapsed"  x:Name="TextBoxCap"/>
         <Button  Content="Войти" Margin="20" x:Name="enter" Click="enter_Click" />
+        <Label x:Name="ErrorText" Foreground="Red" HorizontalContentAlignment="Center"></Label>
         <Button Content="На Главную" Margin="20" x:Name="backBtn" Click="back_Click" />
-
     </StackPanel>
 
 
