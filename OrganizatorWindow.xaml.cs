@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace UchebPraktika
 {
@@ -12,8 +13,12 @@ namespace UchebPraktika
             InitializeComponent();
             currentUser = user;
             LoadUserData();
+
+            DataContext = currentUser; 
+           
         }
 
+        
         private string GetTimePeriod()
         {
             int currentHour = DateTime.Now.Hour;
@@ -37,10 +42,9 @@ namespace UchebPraktika
             string middleName = fioParts.Length > 2 ? fioParts[2] : "";
 
             string timePeriod = GetTimePeriod();
-            string greeting = $"{timePeriod}, {lastName} {name} {middleName}";
-
-            WelcomeText.Text = greeting;
+            WelcomeText.Text = $"{timePeriod}, {lastName} {name} {middleName}";
         }
+
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {

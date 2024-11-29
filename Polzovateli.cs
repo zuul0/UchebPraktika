@@ -28,7 +28,14 @@ namespace UchebPraktika
         public string Telephone { get; set; }
         public string Parol { get; set; }
         public string Pol { get; set; }
-    
+
+        public string Foto
+        {
+            get
+            {
+                return $"/Images/foto{Id_polzovatelya}.jpg";
+            }
+        }
         public virtual ICollection<Activnost_Merop> Activnost_Merop { get; set; }
         public virtual ICollection<Merop_Uchastnik> Merop_Uchastnik { get; set; }
         public virtual ICollection<Merop_Zhuri> Merop_Zhuri { get; set; }
